@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:tns="http://118.97.57.5:5555/telkomWSDL/telkomSAAS/SaaSNotification" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" name="SaaSNotification" targetNamespace="http://118.97.57.5:5555/telkomWSDL/telkomSAAS/SaaSNotification">
+  <wsdl:types>
+    <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://118.97.57.5:5555/telkomWSDL/telkomSAAS/SaaSNotification" xmlns:SOAP_ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" targetNamespace="http://118.97.57.5:5555/telkomWSDL/telkomSAAS/SaaSNotification">
+          <xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+          <xsd:complexType name="SaaSNotification">
+            <xsd:sequence>
+              <xsd:element name="HostID" nillable="true" type="xsd:string"/>
+              <xsd:element name="OrderID" nillable="true" type="xsd:string"/>
+              <xsd:element name="CustID" nillable="true" type="xsd:string"/>
+              <xsd:element name="TypeTransaction" nillable="true" type="xsd:string"/>
+              <xsd:element name="Status" nillable="true" type="xsd:string"/>
+              <xsd:element name="Message" nillable="true" type="xsd:string"/>
+              <xsd:element name="NotifyAttr" nillable="true" type="tns:ArrayOfENCNotifyAttr"/>
+            </xsd:sequence>
+          </xsd:complexType>
+          <xsd:complexType name="NotifyAttr">
+            <xsd:sequence>
+              <xsd:element name="Name" nillable="true" type="xsd:string"/>
+              <xsd:element name="Value" nillable="true" type="xsd:string"/>
+            </xsd:sequence>
+          </xsd:complexType>
+          <xsd:complexType name="ArrayOfNotifyAttr">
+<xsd:sequence>
+			<xsd:element name="ArrayOfNotifyAttrItem" type="tns:NotifyAttr" maxOccurs="unbounded"/>
+		</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="ArrayOfENCNotifyAttr">
+            <xsd:complexContent>
+              <xsd:restriction base="SOAP_ENC:Array">
+                <xsd:attribute ref="SOAP_ENC:arrayType" wsdl:arrayType="tns:NotifyAttr[]"/>
+              </xsd:restriction>
+            </xsd:complexContent>
+          </xsd:complexType>
+          
+          <xsd:complexType name="SaaSNotificationResponse">
+            <xsd:sequence>
+              <xsd:element name="OutStatus" nillable="true" type="xsd:string"/>
+              <xsd:element name="OutMessage" nillable="true" type="xsd:string"/>
+              <xsd:element name="OutAttr" nillable="true" type="tns:ArrayOfENCOutAttr"/>
+            </xsd:sequence>
+          </xsd:complexType>
+          <xsd:complexType name="OutAttr">
+            <xsd:sequence>
+              <xsd:element name="Name" nillable="true" type="xsd:string"/>
+              <xsd:element name="Value" nillable="true" type="xsd:string"/>
+            </xsd:sequence>
+          </xsd:complexType>
+          <xsd:complexType name="ArrayOfOutAttr">
+<xsd:sequence>
+			<xsd:element name="ArrayOfOutAttrItem" type="tns:OutAttr" maxOccurs="unbounded"/>
+		</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="ArrayOfENCOutAttr">
+            <xsd:complexContent>
+              <xsd:restriction base="SOAP_ENC:Array">
+                <xsd:attribute ref="SOAP_ENC:arrayType" wsdl:arrayType="tns:OutAttr[]"/>
+              </xsd:restriction>
+            </xsd:complexContent>
+          </xsd:complexType>
+          
+        			<xsd:element name="SaaSNotification" type="tns:SaaSNotification"/>
+			<xsd:element name="SaaSNotificationResponse" type="tns:SaaSNotificationResponse"/>
+	</xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="SaaSNotification_PortType_SaaSNotificationResponse">
+    <wsdl:part name="OutStatus" type="xsd:string">
+    </wsdl:part>
+    <wsdl:part name="OutMessage" type="xsd:string">
+    </wsdl:part>
+    <wsdl:part name="OutAttr" type="tns:ArrayOfENCOutAttr">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="SaaSNotification_PortType_SaaSNotification">
+    <wsdl:part name="HostID" type="xsd:string">
+    </wsdl:part>
+    <wsdl:part name="OrderID" type="xsd:string">
+    </wsdl:part>
+    <wsdl:part name="CustID" type="xsd:string">
+    </wsdl:part>
+    <wsdl:part name="TypeTransaction" type="xsd:string">
+    </wsdl:part>
+    <wsdl:part name="Status" type="xsd:string">
+    </wsdl:part>
+    <wsdl:part name="Message" type="xsd:string">
+    </wsdl:part>
+    <wsdl:part name="NotifyAttr" type="tns:ArrayOfENCNotifyAttr">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="SaaSNotification_PortType">
+    <wsdl:operation name="SaaSNotification">
+      <wsdl:input message="tns:SaaSNotification_PortType_SaaSNotification">
+    </wsdl:input>
+      <wsdl:output message="tns:SaaSNotification_PortType_SaaSNotificationResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="telkomWSDL_telkomSAAS_SaaSNotification_Binder" type="tns:SaaSNotification_PortType">
+    <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="SaaSNotification">
+      <soap:operation soapAction="telkomWSDL_telkomSAAS_SaaSNotification_Binder_SaaSNotification" style="rpc"/>
+      <wsdl:input>
+        <soap:body parts="HostID OrderID CustID TypeTransaction Status Message NotifyAttr" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://118.97.57.5:5555/telkomWSDL/telkomSAAS/SaaSNotification"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body parts="OutStatus OutMessage OutAttr" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://118.97.57.5:5555/telkomWSDL/telkomSAAS/SaaSNotification"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SaaSNotification">
+    <wsdl:port name="telkomWSDL_telkomSAAS_SaaSNotification_Port" binding="tns:telkomWSDL_telkomSAAS_SaaSNotification_Binder">
+      <soap:address location="http://118.97.57.5:5555/ws/telkomWSDL.telkomSAAS:SaaSNotification"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="1.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
+  <persistence-unit name="fabformatic" transaction-type="RESOURCE_LOCAL">
+    <class>fab.formatic.backend.domain.FabService</class>
+    <class>fab.formatic.backend.domain.FabTypeCharging</class>
+    <class>fab.formatic.backend.domain.FabCustomer</class>
+    <class>fab.formatic.backend.domain.FabPackage</class>
+    <class>fab.formatic.backend.domain.FabServiceUsed</class>
+    <class>fab.formatic.backend.domain.FabLogin</class>
+    <class>fab.formatic.backend.domain.FabModule</class>
+    <class>fab.formatic.backend.domain.FabIncident</class>
+    <class>fab.formatic.backend.domain.FabTariff</class>
+    <class>fab.formatic.backend.domain.FabOrder</class>
+    <class>fab.formatic.backend.domain.FabServiceStatus</class>
+    <class>fab.formatic.backend.domain.FabModuleStatus</class>
+    <class>fab.formatic.backend.domain.FabStatusOrder</class>
+    <class>fab.formatic.backend.domain.FabOrderModule</class>
+    <properties>
+			<property name="hibernate.hbm2dll.auto" value="create"/>
+			<property name="hibernate.ejb.naming_strategy" value="org.hibernate.cfg.ImprovedNamingStrategy"/>
+            <property name="hibernate.connection.charSet" value="UTF-8"/>
+		</properties>
+  </persistence-unit>
+</persistence>

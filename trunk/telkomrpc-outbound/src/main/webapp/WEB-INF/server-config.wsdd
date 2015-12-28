@@ -1,0 +1,204 @@
+<!-- Use this file to deploy some handlers/chains and services -->
+<!-- Two ways to do this: -->
+<!-- java org.apache.axis.client.AdminClient deploy.wsdd -->
+<!-- after the axis server is running -->
+<!-- or -->
+<!-- java org.apache.axis.utils.Admin client|server deploy.wsdd -->
+<!-- from the same directory that the Axis engine runs -->
+
+<deployment xmlns="http://xml.apache.org/axis/wsdd/"
+	xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+	<globalConfiguration>
+		<parameter name="sendXsiTypes" value="true" />
+		<parameter name="sendMultiRefs" value="true" />
+		<parameter name="sendXMLDeclaration" value="true" />
+		<parameter name="axis.sendMinimizedElements" value="true" />
+	</globalConfiguration>
+	<handler name="URLMapper" type="java:org.apache.axis.handlers.http.URLMapper" />
+
+	<!-- Services from telkomWSDL_telkomSpeedyService WSDL service -->
+
+	<service name="telkomWSDL_telkomSAAS_SaaSNotification_Port"
+		provider="java:RPC" style="rpc" use="encoded">
+		<parameter name="wsdlTargetNamespace"
+			value="http://118.97.57.5:5555/telkomWSDL/telkomSAAS/SaaSNotification" />
+		<parameter name="wsdlServiceElement" value="SaaSNotification" />
+		<parameter name="schemaUnqualified"
+			value="http://118.97.57.5:5555/telkomWSDL/telkomSAAS/SaaSNotification" />
+		<parameter name="wsdlServicePort"
+			value="telkomWSDL_telkomSAAS_SaaSNotification_Port" />
+		<parameter name="className"
+			value="fab.formatic.rpc.dto.TelkomWSDL_telkomSAAS_SaaSNotification_BinderImpl" />
+		<parameter name="wsdlPortType" value="SaaSNotification_PortType" />
+		<parameter name="typeMappingVersion" value="1.1" />
+		<operation name="saaSNotification" qname="operNS:SaaSNotification"
+			xmlns:operNS="http://118.97.57.5:5555/telkomWSDL/telkomSAAS/SaaSNotification"
+			soapAction="telkomWSDL_telkomSAAS_SaaSNotification_Binder_SaaSNotification">
+			<parameter qname="HostID" type="tns:string"
+				xmlns:tns="http://www.w3.org/2001/XMLSchema" />
+			<parameter qname="OrderID" type="tns:string"
+				xmlns:tns="http://www.w3.org/2001/XMLSchema" />
+			<parameter qname="CustID" type="tns:string"
+				xmlns:tns="http://www.w3.org/2001/XMLSchema" />
+			<parameter qname="TypeTransaction" type="tns:string"
+				xmlns:tns="http://www.w3.org/2001/XMLSchema" />
+			<parameter qname="Status" type="tns:string"
+				xmlns:tns="http://www.w3.org/2001/XMLSchema" />
+			<parameter qname="Message" type="tns:string"
+				xmlns:tns="http://www.w3.org/2001/XMLSchema" />
+			<parameter qname="NotifyAttr" type="tns:ArrayOfENCNotifyAttr"
+				xmlns:tns="http://118.97.57.5:5555/telkomWSDL/telkomSAAS/SaaSNotification" />
+			<parameter qname="OutStatus" type="tns:string"
+				xmlns:tns="http://www.w3.org/2001/XMLSchema" mode="OUT" />
+			<parameter qname="OutMessage" type="tns:string"
+				xmlns:tns="http://www.w3.org/2001/XMLSchema" mode="OUT" />
+			<parameter qname="OutAttr" type="tns:ArrayOfENCOutAttr"
+				xmlns:tns="http://118.97.57.5:5555/telkomWSDL/telkomSAAS/SaaSNotification"
+				mode="OUT" />
+		</operation>
+		<parameter name="allowedMethods" value="saaSNotification" />
+
+		<typeMapping
+			xmlns:ns="http://118.97.57.5:5555/telkomWSDL/telkomSAAS/SaaSNotification"
+			qname="ns:OutAttr" type="java:fab.formatic.rpc.dto.OutAttr"
+			serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+			deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+			encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+		<typeMapping
+			xmlns:ns="http://118.97.57.5:5555/telkomWSDL/telkomSAAS/SaaSNotification"
+			qname="ns:NotifyAttr" type="java:fab.formatic.rpc.dto.NotifyAttr"
+			serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+			deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+			encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+		<arrayMapping
+			xmlns:ns="http://118.97.57.5:5555/telkomWSDL/telkomSAAS/SaaSNotification"
+			qname="ns:ArrayOfENCNotifyAttr" type="java:fab.formatic.rpc.dto.NotifyAttr[]"
+			innerType="cmp-ns:NotifyAttr"
+			xmlns:cmp-ns="http://118.97.57.5:5555/telkomWSDL/telkomSAAS/SaaSNotification"
+			encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+		<arrayMapping
+			xmlns:ns="http://118.97.57.5:5555/telkomWSDL/telkomSAAS/SaaSNotification"
+			qname="ns:ArrayOfENCOutAttr" type="java:fab.formatic.rpc.dto.OutAttr[]"
+			innerType="cmp-ns:OutAttr"
+			xmlns:cmp-ns="http://118.97.57.5:5555/telkomWSDL/telkomSAAS/SaaSNotification"
+			encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+	</service>
+	<transport name="http">
+		<requestFlow>
+			<handler type="URLMapper" />
+			<handler type="java:org.apache.axis.handlers.http.HTTPAuthHandler" />
+		</requestFlow>
+		<parameter name="qs:list"
+			value="org.apache.axis.transport.http.QSListHandler" />
+		<parameter name="qs:wsdl"
+			value="org.apache.axis.transport.http.QSWSDLHandler" />
+		<parameter name="qs.list"
+			value="org.apache.axis.transport.http.QSListHandler" />
+		<parameter name="qs.method"
+			value="org.apache.axis.transport.http.QSMethodHandler" />
+		<parameter name="qs:method"
+			value="org.apache.axis.transport.http.QSMethodHandler" />
+		<parameter name="qs.wsdl"
+			value="org.apache.axis.transport.http.QSWSDLHandler" />
+	</transport>
+	<transport name="local">
+		<responseFlow>
+			<handler type="LocalResponder" />
+		</responseFlow>
+	</transport>
+</deployment>
+
+
+
+
+<!-- ns1:deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java" 
+	xmlns:ns1="http://xml.apache.org/axis/wsdd/"> <ns1:globalConfiguration> <ns1:parameter 
+	name="sendMultiRefs" value="true" /> <ns1:parameter name="disablePrettyXML" 
+	value="true" /> <ns1:parameter name="adminPassword" value="admin" /> <ns1:parameter 
+	name="attachments.Directory" value="/home/gilang/Documents/swgworkspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp1/wtpwebapps/telkomrpc/WEB-INF/attachments" 
+	/> <ns1:parameter name="dotNetSoapEncFix" value="true" /> <ns1:parameter 
+	name="enableNamespacePrefixOptimization" value="false" /> <ns1:parameter 
+	name="sendXMLDeclaration" value="true" /> <ns1:parameter name="sendXsiTypes" 
+	value="true" /> <ns1:parameter name="attachments.implementation" value="org.apache.axis.attachments.AttachmentsImpl" 
+	/> <ns1:requestFlow> <ns1:handler type="java:org.apache.axis.handlers.JWSHandler"> 
+	<ns1:parameter name="scope" value="session" /> </ns1:handler> <ns1:handler 
+	type="java:org.apache.axis.handlers.JWSHandler"> <ns1:parameter name="scope" 
+	value="request" /> <ns1:parameter name="extension" value=".jwr" /> </ns1:handler> 
+	</ns1:requestFlow> </ns1:globalConfiguration> <ns1:handler name="URLMapper" 
+	type="java:org.apache.axis.handlers.http.URLMapper" /> <ns1:handler name="LocalResponder" 
+	type="java:org.apache.axis.transport.local.LocalResponder" /> <ns1:handler 
+	name="Authenticate" type="java:org.apache.axis.handlers.SimpleAuthenticationHandler" 
+	/> <ns1:service name="telkomWSDL_telkomSpeedyPort0" provider="java:RPC" style="rpc" 
+	use="encoded"> <ns3:operation name="publishProvSpeedy" qname="ns2:publishProvSpeedy" 
+	returnQName="publishProvSpeedyOutput" returnType="ns1:PublishProvSpeedyOuput" 
+	soapAction="" xmlns:ns1="http://www.webmethods.com/telkomWSDL.telkomSpeedy" 
+	xmlns:ns2="http://localhost/telkomWSDL/telkomSpeedy/publishProvSpeedy" xmlns:ns3="http://xml.apache.org/axis/wsdd/"> 
+	<ns3:parameter name="publishProvSpeedyInput" type="ns1:PublishProvSpeedyInput" 
+	/> </ns3:operation> <ns1:parameter name="wsdlServicePort" value="TelkomService" 
+	/> <ns1:parameter name="className" value="fab.formatic.rpc.TelkomService" 
+	/> <ns1:parameter name="typeMappingVersion" value="1.2" /> <ns1:parameter 
+	name="allowedMethods" value="publishProvSpeedy" /> <ns1:parameter name="wsdlServiceElement" 
+	value="TelkomServiceService" /> <ns1:parameter name="wsdlTargetNamespace" 
+	value="http://www.webmethods.com/" /> <ns1:parameter name="wsdlPortType" 
+	value="TelkomService" /> <ns1:parameter name="scope" value="Application" 
+	/> <ns1:parameter name="schemaUnqualified" value="http://localhost/telkomWSDL/telkomSpeedy/publishProvSpeedy,http://www.webmethods.com/telkomWSDL.telkomSpeedy" 
+	/> <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" 
+	encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns3:AttrPaket" 
+	serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:fab.formatic.rpc.dto.AttrPaket" 
+	xmlns:ns3="http://localhost/telkomWSDL/telkomSpeedy/publishProvSpeedy" /> 
+	<ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" 
+	encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns4:ProvSpeedy" 
+	serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:fab.formatic.rpc.dto.ProvSpeedy" 
+	xmlns:ns4="http://localhost/telkomWSDL/telkomSpeedy/publishProvSpeedy" /> 
+	<ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" 
+	encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns5:PublishProvSpeedyOuput" 
+	serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:fab.formatic.rpc.dto.PublishProvSpeedyOuput" 
+	xmlns:ns5="http://localhost/telkomWSDL/telkomSpeedy/publishProvSpeedy" /> 
+	<ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" 
+	encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns6:AttrUser" 
+	serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:fab.formatic.rpc.dto.AttrUser" 
+	xmlns:ns6="http://localhost/telkomWSDL/telkomSpeedy/publishProvSpeedy" /> 
+	<ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" 
+	encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns7:AttrContract" 
+	serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:fab.formatic.rpc.dto.AttrContact" 
+	xmlns:ns7="http://localhost/telkomWSDL/telkomSpeedy/publishProvSpeedy" /> 
+	<ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" 
+	encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns8:PublishProvSpeedyInput" 
+	serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:fab.formatic.rpc.dto.PublishProvSpeedyInput" 
+	xmlns:ns8="http://localhost/telkomWSDL/telkomSpeedy/publishProvSpeedy" /> 
+	<ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" 
+	encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns9:BillingAnchor" 
+	serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:fab.formatic.rpc.dto.BillingAnchor" 
+	xmlns:ns9="http://localhost/telkomWSDL/telkomSpeedy/publishProvSpeedy" /> 
+	<ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" 
+	encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns10:Response" 
+	serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:fab.formatic.rpc.dto.Response" 
+	xmlns:ns10="http://localhost/telkomWSDL/telkomSpeedy/publishProvSpeedy" /> 
+	<ns1:arrayMapping innerType="ns12:AttrPaket" languageSpecificType="java:fab.formatic.rpc.dto.AttrPaket[]" 
+	qname="ns11:ArrayOf_tns1_AttrPaket" xmlns:ns11="http://localhost/telkomWSDL/telkomSpeedy/publishProvSpeedy" 
+	xmlns:ns12="http://localhost/telkomWSDL/telkomSpeedy/publishProvSpeedy" /> 
+	<ns1:arrayMapping innerType="ns14:BillingAnchor" languageSpecificType="java:fab.formatic.rpc.dto.BillingAnchor[]" 
+	qname="ns13:ArrayOf_tns1_BillingAnchor" xmlns:ns13="http://localhost/telkomWSDL/telkomSpeedy/publishProvSpeedy" 
+	xmlns:ns14="http://localhost/telkomWSDL/telkomSpeedy/publishProvSpeedy" /> 
+	<ns1:arrayMapping innerType="ns16:AttrUser" languageSpecificType="java:fab.formatic.rpc.dto.AttrUser[]" 
+	qname="ns15:ArrayOf_tns1_AttrUser" xmlns:ns15="http://localhost/telkomWSDL/telkomSpeedy/publishProvSpeedy" 
+	xmlns:ns16="http://localhost/telkomWSDL/telkomSpeedy/publishProvSpeedy" /> 
+	<ns1:arrayMapping innerType="ns18:AttrContract" languageSpecificType="java:fab.formatic.rpc.dto.AttrContact[]" 
+	qname="ns17:ArrayOf_tns1_AttrContract" xmlns:ns17="http://localhost/telkomWSDL/telkomSpeedy/publishProvSpeedy" 
+	xmlns:ns18="http://localhost/telkomWSDL/telkomSpeedy/publishProvSpeedy" /> 
+	</ns1:service> <ns1:service name="AdminService" provider="java:MSG"> <ns1:parameter 
+	name="allowedMethods" value="AdminService" /> <ns1:parameter name="enableRemoteAdmin" 
+	value="false" /> <ns1:parameter name="className" value="org.apache.axis.utils.Admin" 
+	/> <ns1:namespace>http://xml.apache.org/axis/wsdd/</ns1:namespace> </ns1:service> 
+	<ns1:service name="Version" provider="java:RPC"> <ns1:parameter name="allowedMethods" 
+	value="getVersion" /> <ns1:parameter name="className" value="org.apache.axis.Version" 
+	/> </ns1:service> <ns1:transport name="http"> <ns1:requestFlow> <ns1:handler 
+	type="URLMapper" /> <ns1:handler type="java:org.apache.axis.handlers.http.HTTPAuthHandler" 
+	/> </ns1:requestFlow> <ns1:parameter name="qs:list" value="org.apache.axis.transport.http.QSListHandler" 
+	/> <ns1:parameter name="qs:wsdl" value="org.apache.axis.transport.http.QSWSDLHandler" 
+	/> <ns1:parameter name="qs.list" value="org.apache.axis.transport.http.QSListHandler" 
+	/> <ns1:parameter name="qs.method" value="org.apache.axis.transport.http.QSMethodHandler" 
+	/> <ns1:parameter name="qs:method" value="org.apache.axis.transport.http.QSMethodHandler" 
+	/> <ns1:parameter name="qs.wsdl" value="org.apache.axis.transport.http.QSWSDLHandler" 
+	/> </ns1:transport> <ns1:transport name="local"> <ns1:responseFlow> <ns1:handler 
+	type="LocalResponder" /> </ns1:responseFlow> </ns1:transport> </ns1:deployment -->

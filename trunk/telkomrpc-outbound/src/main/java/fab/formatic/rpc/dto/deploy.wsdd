@@ -1,0 +1,68 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from SaaSNotification WSDL service -->
+
+  <service name="telkomWSDL_telkomSAAS_SaaSNotification_Port" provider="java:RPC" style="rpc" use="encoded">
+      <parameter name="wsdlTargetNamespace" value="http://118.97.57.5:5555/telkomWSDL/telkomSAAS/SaaSNotification"/>
+      <parameter name="wsdlServiceElement" value="SaaSNotification"/>
+      <parameter name="schemaUnqualified" value="http://118.97.57.5:5555/telkomWSDL/telkomSAAS/SaaSNotification"/>
+      <parameter name="wsdlServicePort" value="telkomWSDL_telkomSAAS_SaaSNotification_Port"/>
+      <parameter name="className" value="fab.formatic.rpc.dto.TelkomWSDL_telkomSAAS_SaaSNotification_BinderImpl"/>
+      <parameter name="wsdlPortType" value="SaaSNotification_PortType"/>
+      <parameter name="typeMappingVersion" value="1.1"/>
+      <operation name="saaSNotification" qname="operNS:SaaSNotification" xmlns:operNS="http://118.97.57.5:5555/telkomWSDL/telkomSAAS/SaaSNotification" soapAction="telkomWSDL_telkomSAAS_SaaSNotification_Binder_SaaSNotification" >
+        <parameter qname="HostID" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="OrderID" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="CustID" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="TypeTransaction" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="Status" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="Message" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="NotifyAttr" type="tns:ArrayOfENCNotifyAttr" xmlns:tns="http://118.97.57.5:5555/telkomWSDL/telkomSAAS/SaaSNotification"/>
+        <parameter qname="OutStatus" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema" mode="OUT"/>
+        <parameter qname="OutMessage" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema" mode="OUT"/>
+        <parameter qname="OutAttr" type="tns:ArrayOfENCOutAttr" xmlns:tns="http://118.97.57.5:5555/telkomWSDL/telkomSAAS/SaaSNotification" mode="OUT"/>
+      </operation>
+      <parameter name="allowedMethods" value="saaSNotification"/>
+
+      <typeMapping
+        xmlns:ns="http://118.97.57.5:5555/telkomWSDL/telkomSAAS/SaaSNotification"
+        qname="ns:OutAttr"
+        type="java:fab.formatic.rpc.dto.OutAttr"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="http://118.97.57.5:5555/telkomWSDL/telkomSAAS/SaaSNotification"
+        qname="ns:NotifyAttr"
+        type="java:fab.formatic.rpc.dto.NotifyAttr"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <arrayMapping
+        xmlns:ns="http://118.97.57.5:5555/telkomWSDL/telkomSAAS/SaaSNotification"
+        qname="ns:ArrayOfENCNotifyAttr"
+        type="java:fab.formatic.rpc.dto.NotifyAttr[]"
+        innerType="cmp-ns:NotifyAttr" xmlns:cmp-ns="http://118.97.57.5:5555/telkomWSDL/telkomSAAS/SaaSNotification"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <arrayMapping
+        xmlns:ns="http://118.97.57.5:5555/telkomWSDL/telkomSAAS/SaaSNotification"
+        qname="ns:ArrayOfENCOutAttr"
+        type="java:fab.formatic.rpc.dto.OutAttr[]"
+        innerType="cmp-ns:OutAttr" xmlns:cmp-ns="http://118.97.57.5:5555/telkomWSDL/telkomSAAS/SaaSNotification"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+  </service>
+</deployment>

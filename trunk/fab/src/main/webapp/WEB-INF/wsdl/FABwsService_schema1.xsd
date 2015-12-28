@@ -1,0 +1,439 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" targetNamespace="http://fab/" xmlns:tns="http://fab/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="BillTransaction" nillable="true" type="tns:billTransaction"/>
+
+  <xs:element name="BillTransactionResponse" nillable="true" type="tns:billTransactionResponse"/>
+
+  <xs:element name="GetBillingData" nillable="true" type="tns:getBillingData"/>
+
+  <xs:element name="GetBillingDataResponse" nillable="true" type="tns:getBillingDataResponse"/>
+
+  <xs:element name="GetService" nillable="true" type="tns:getService"/>
+
+  <xs:element name="GetServiceData" nillable="true" type="tns:getServiceData"/>
+
+  <xs:element name="GetServiceDataResponse" nillable="true" type="tns:getServiceDataResponse"/>
+
+  <xs:element name="GetServiceList" nillable="true" type="tns:getServiceList"/>
+
+  <xs:element name="GetServiceListResponse" nillable="true" type="tns:getServiceListResponse"/>
+
+  <xs:element name="GetServiceResponse" nillable="true" type="tns:getServiceResponse"/>
+
+  <xs:element name="GetTarrif" nillable="true" type="tns:getTarrif"/>
+
+  <xs:element name="GetTarrifResponse" nillable="true" type="tns:getTarrifResponse"/>
+
+  <xs:element name="IncidentInput" nillable="true" type="tns:incidentInput"/>
+
+  <xs:element name="IncidentInputResponse" nillable="true" type="tns:incidentInputResponse"/>
+
+  <xs:element name="IncidentTracking" nillable="true" type="tns:incidentTracking"/>
+
+  <xs:element name="IncidentTrackingResponse" nillable="true" type="tns:incidentTrackingResponse"/>
+
+  <xs:element name="OrderInput" nillable="true" type="tns:orderInput"/>
+
+  <xs:element name="OrderInputResponse" nillable="true" type="tns:orderInputResponse"/>
+
+  <xs:element name="OrderTracking" nillable="true" type="tns:orderTracking"/>
+
+  <xs:element name="OrderTrackingResponse" nillable="true" type="tns:orderTrackingResponse"/>
+
+  <xs:element name="UpdateBillInfo" nillable="true" type="tns:updateBillInfo"/>
+
+  <xs:element name="UpdateBillInfoResponse" nillable="true" type="tns:updateBillInfoResponse"/>
+
+  <xs:element name="getModuleInfo" nillable="true" type="tns:getModuleInfo"/>
+
+  <xs:element name="getModuleInfoResponse" nillable="true" type="tns:getModuleInfoResponse"/>
+
+  <xs:element name="getServiceInfo" nillable="true" type="tns:getServiceInfo"/>
+
+  <xs:element name="getServiceInfoResponse" nillable="true" type="tns:getServiceInfoResponse"/>
+
+  <xs:element name="login" nillable="true" type="tns:login"/>
+
+  <xs:element name="loginResponse" nillable="true" type="tns:loginResponse"/>
+
+  <xs:complexType name="getServiceList">
+    <xs:sequence>
+      <xs:element name="accountID" type="xs:string" minOccurs="0"/>
+      <xs:element name="sessionID" type="xs:string" minOccurs="0"/>
+      <xs:element name="transID" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getServiceListResponse">
+    <xs:sequence>
+      <xs:element name="return" type="tns:getServiceListOutput" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getServiceListOutput">
+    <xs:sequence>
+      <xs:element name="outMsg" type="xs:string" minOccurs="0"/>
+      <xs:element name="servicelist" type="tns:serviceList" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="serviceList">
+    <xs:sequence>
+      <xs:element name="isToBeBilled" type="xs:boolean"/>
+      <xs:element name="servPeriodUnit" type="xs:string" minOccurs="0"/>
+      <xs:element name="serviceAmt" type="xs:string" minOccurs="0"/>
+      <xs:element name="serviceCount" type="tns:number" minOccurs="0"/>
+      <xs:element name="serviceEnd" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="serviceID" type="xs:int"/>
+      <xs:element name="serviceName" type="xs:string" minOccurs="0"/>
+      <xs:element name="servicePeriod" type="xs:int"/>
+      <xs:element name="serviceSeq" type="xs:int"/>
+      <xs:element name="serviceStart" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="serviceType" type="xs:string" minOccurs="0"/>
+      <xs:element name="serviceUnit" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="number">
+    <xs:sequence>
+    	<xs:element name="doubleValue" type="xs:double" minOccurs="0"/>
+    	<xs:element name="intValue" type="xs:int" minOccurs="0"/>
+    	<xs:element name="stringValue" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="orderTracking">
+    <xs:sequence>
+      <xs:element name="accountID" type="xs:string" minOccurs="0"/>
+      <xs:element name="serviceID" type="xs:string" minOccurs="0"/>
+      <xs:element name="sessionID" type="xs:string" minOccurs="0"/>
+      <xs:element name="transID" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="orderTrackingResponse">
+    <xs:sequence>
+      <xs:element name="return" type="tns:trans" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="trans">
+    <xs:sequence>
+      <xs:element name="transDate" type="xs:string" minOccurs="0"/>
+      <xs:element name="transDesc" type="xs:string" minOccurs="0"/>
+      <xs:element name="transStatus" type="xs:string" minOccurs="0"/>
+      <xs:element name="transType" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="billTransaction">
+    <xs:sequence>
+      <xs:element name="accountID" type="xs:string" minOccurs="0"/>
+      <xs:element name="serviceDataList" type="tns:serviceDataList" minOccurs="0"/>
+      <xs:element name="transID" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="serviceDataList">
+    <xs:sequence>
+      <xs:element name="discAmount" type="tns:number" minOccurs="0"/>
+      <xs:element name="isCharged" type="xs:boolean"/>
+      <xs:element name="isExceed" type="xs:boolean"/>
+      <xs:element name="transAmt" type="tns:number" minOccurs="0"/>
+      <xs:element name="transAttr1" type="xs:string" minOccurs="0"/>
+      <xs:element name="transAttr2" type="xs:string" minOccurs="0"/>
+      <xs:element name="transAttr3" type="xs:string" minOccurs="0"/>
+      <xs:element name="transDateTime" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="transName" type="xs:string" minOccurs="0"/>
+      <xs:element name="transSeq" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="billTransactionResponse">
+    <xs:sequence>
+      <xs:element name="return" type="tns:billTransactionOutput" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="billTransactionOutput">
+    <xs:sequence>
+      <xs:element name="isSuccess" type="xs:boolean"/>
+      <xs:element name="outMsg" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getServiceInfo">
+    <xs:sequence>
+      <xs:element name="serviceID" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getServiceInfoResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getBillingData">
+    <xs:sequence>
+      <xs:element name="accountID" type="xs:string" minOccurs="0"/>
+      <xs:element name="periode" type="xs:string" minOccurs="0"/>
+      <xs:element name="serviceID" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getBillingDataResponse">
+    <xs:sequence>
+      <xs:element name="return" type="tns:getBillingDataOutput" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getBillingDataOutput">
+    <xs:sequence>
+      <xs:element name="billingdata" type="tns:billingData" minOccurs="0"/>
+      <xs:element name="outMsg" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="billingData">
+    <xs:sequence>
+      <xs:element name="amount" type="tns:number" minOccurs="0"/>
+      <xs:element name="discAmount" type="tns:number" minOccurs="0"/>
+      <xs:element name="isPaid" type="xs:boolean"/>
+      <xs:element name="period" type="xs:string" minOccurs="0"/>
+      <xs:element name="productName" type="xs:string" minOccurs="0"/>
+      <xs:element name="revCodeName" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getServiceData">
+    <xs:sequence>
+      <xs:element name="accountID" type="xs:string" minOccurs="0"/>
+      <xs:element name="serviceSeq" type="xs:int"/>
+      <xs:element name="sessionID" type="xs:string" minOccurs="0"/>
+      <xs:element name="transID" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getServiceDataResponse">
+    <xs:sequence>
+      <xs:element name="return" type="tns:getServiceDataOutput" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getServiceDataOutput">
+    <xs:sequence>
+      <xs:element name="outMsg" type="xs:string" minOccurs="0"/>
+      <xs:element name="servicedatalist" type="tns:serviceDataList" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="orderInput">
+    <xs:sequence>
+      <xs:element name="accountID" type="xs:string" minOccurs="0"/>
+      <xs:element name="module" type="tns:module" minOccurs="0"/>
+      <xs:element name="_package" type="tns:package" minOccurs="0"/>
+      <xs:element name="serviceAttr" type="tns:serviceAttr" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="serviceID" type="xs:string" minOccurs="0"/>
+      <xs:element name="sessionID" type="xs:string" minOccurs="0"/>
+      <xs:element name="transType" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="module">
+    <xs:sequence>
+      <xs:element name="ID" type="xs:string" minOccurs="0"/>
+      <xs:element name="name" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="package">
+    <xs:sequence>
+      <xs:element name="ID" type="xs:string" minOccurs="0"/>
+      <xs:element name="name" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="serviceAttr">
+    <xs:sequence>
+      <xs:element name="name" type="xs:string" minOccurs="0"/>
+      <xs:element name="value" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="orderInputResponse">
+    <xs:sequence>
+      <xs:element name="return" type="tns:orderInputOutput" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="orderInputOutput">
+    <xs:sequence>
+      <xs:element name="outAttr" type="tns:outAttr" minOccurs="0"/>
+      <xs:element name="outMsg" type="xs:string" minOccurs="0"/>
+      <xs:element name="outStatus" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="outAttr">
+    <xs:sequence>
+      <xs:element name="name" type="xs:string" minOccurs="0"/>
+      <xs:element name="value" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getModuleInfo">
+    <xs:sequence>
+      <xs:element name="moduleID" type="xs:string" minOccurs="0"/>
+      <xs:element name="serviceID" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getModuleInfoResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="incidentTracking">
+    <xs:sequence>
+      <xs:element name="accountID" type="xs:string" minOccurs="0"/>
+      <xs:element name="serviceID" type="xs:string" minOccurs="0"/>
+      <xs:element name="sessionID" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="incidentTrackingResponse">
+    <xs:sequence>
+      <xs:element name="return" type="tns:incidentTrackingOutput" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="incidentTrackingOutput">
+    <xs:sequence>
+      <xs:element name="date" type="xs:string" minOccurs="0"/>
+      <xs:element name="solutionDesc" type="xs:string" minOccurs="0"/>
+      <xs:element name="statusDesc" type="xs:string" minOccurs="0"/>
+      <xs:element name="transID" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="login">
+    <xs:sequence>
+      <xs:element name="adminEmail" type="xs:string" minOccurs="0"/>
+      <xs:element name="password" type="xs:string" minOccurs="0"/>
+      <xs:element name="serviceID" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="loginResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getService">
+    <xs:sequence>
+      <xs:element name="serviceID" type="xs:string" minOccurs="0"/>
+      <xs:element name="sessionID" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getServiceResponse">
+    <xs:sequence>
+      <xs:element name="return" type="tns:getServiceOutput" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getServiceOutput">
+    <xs:sequence>
+      <xs:element name="outMsg" type="xs:string" minOccurs="0"/>
+      <xs:element name="servicelist" type="tns:serviceList" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getTarrif">
+    <xs:sequence>
+      <xs:element name="serviceID" type="xs:string" minOccurs="0"/>
+      <xs:element name="sessionID" type="xs:string" minOccurs="0"/>
+      <xs:element name="viewDate" type="xs:dateTime" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getTarrifResponse">
+    <xs:sequence>
+      <xs:element name="return" type="tns:getTarrifOutput" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getTarrifOutput">
+    <xs:sequence>
+      <xs:element name="outMsg" type="xs:string" minOccurs="0"/>
+      <xs:element name="tarriflist" type="tns:tarrifList" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="tarrifList">
+    <xs:sequence>
+      <xs:element name="initiationFee" type="xs:string" minOccurs="0"/>
+      <xs:element name="isToBeBilled" type="xs:boolean"/>
+      <xs:element name="period" type="xs:int"/>
+      <xs:element name="periodUnit" type="xs:unsignedShort"/>
+      <xs:element name="quantity" type="tns:number" minOccurs="0"/>
+      <xs:element name="recurringFee" type="xs:string" minOccurs="0"/>
+      <xs:element name="salesEnd" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="salesStart" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="serviceID" type="xs:int"/>
+      <xs:element name="serviceUnit" type="tns:number" minOccurs="0"/>
+      <xs:element name="terminationFee" type="tns:number" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="incidentInput">
+    <xs:sequence>
+      <xs:element name="accountID" type="xs:string" minOccurs="0"/>
+      <xs:element name="contactPerson" type="xs:string" minOccurs="0"/>
+      <xs:element name="incidentDesc" type="xs:string" minOccurs="0"/>
+      <xs:element name="serviceID" type="xs:string" minOccurs="0"/>
+      <xs:element name="sessionID" type="xs:string" minOccurs="0"/>
+      <xs:element name="transID" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="incidentInputResponse">
+    <xs:sequence>
+      <xs:element name="return" type="tns:incidentInputOutput" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="incidentInputOutput">
+    <xs:sequence>
+      <xs:element name="outMsg" type="xs:string" minOccurs="0"/>
+      <xs:element name="outStatus" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="updateBillInfo">
+    <xs:sequence>
+      <xs:element name="accountID" type="xs:string" minOccurs="0"/>
+      <xs:element name="serviceSeq" type="xs:int"/>
+      <xs:element name="sessionID" type="xs:string" minOccurs="0"/>
+      <xs:element name="transID" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="updateBillInfoResponse">
+    <xs:sequence>
+      <xs:element name="return" type="tns:updateBillInfoOutput" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="updateBillInfoOutput">
+    <xs:sequence>
+      <xs:element name="isSuccess" type="xs:boolean"/>
+      <xs:element name="outMsg" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
+
